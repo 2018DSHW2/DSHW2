@@ -2,6 +2,7 @@
 //#include"article_load.h"
 //#include"User.h"
 #include "stem.h"
+#include "define.h"
 using namespace std;
 /*
 void run()
@@ -19,8 +20,7 @@ void run()
 **/
 void test()
 {
-	string a = string("pencils");
-	cout<<stemword(a);
+	
 }
 
 int main()

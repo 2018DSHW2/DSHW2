@@ -86,12 +86,26 @@ void Articlesystem::updateArticle(Article* input)
 
 void Articlesystem::getStopWord()
 {
+	stopWord.clear();
+	string a;
+	ifstream file(STOPWORD_PATH);
+	while (!file.eof())
+	{
+		file >> a;
+		stopWord.insert(a);
+	}
+	return;
 
 }
 
 string Articlesystem::getStem(string  input)
 {
-	return string("a");
+	return stemword(input);
+}
+
+vector<string> Articlesystem::divideWords(string input)
+{
+	vector<string> output;
 
 }
 

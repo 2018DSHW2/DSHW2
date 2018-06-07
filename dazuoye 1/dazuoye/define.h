@@ -23,3 +23,4 @@
 #include <map>
 
 #define NUM_of_article  17000;
+#define STOPWORD_PATH "stopword.txt"
