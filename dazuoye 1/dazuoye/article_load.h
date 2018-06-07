@@ -34,7 +34,7 @@ public:
 	void getsimilarReco();
 	void getStopWord();//获取高频词表，找一个txt然后去除
 	vector<string> divideWords(string input);//分词
-	unordered_map<string, double> countWords(vector<string> input);//计算单词数量,去除停用词
+	unordered_map<string, double> countWords(const vector<string> input);//计算单词数量,去除停用词
 	string getStem(string input);//获取词干
 
 	void updateArticle(Article *input);//更新Article，完成分词等

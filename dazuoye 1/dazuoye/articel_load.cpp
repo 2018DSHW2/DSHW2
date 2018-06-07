@@ -81,7 +81,39 @@ void Articlesystem::getsimilarReco()
 
 void Articlesystem::updateArticle(Article* input)
 {
+	vector<string> word = divideWords(input->abstra);
+	vector<string>::iterator itr;
+	for (itr = word.begin(); itr !=  word.end(); itr++)
+	{
+		if (stopWord.find(*itr) != stopWord.end())
+		{
+			itr = word.erase(itr);
+		}
+		else
+		{
+			continue;
+		}
+	}//È¥³ýÍ£ÓÃ´Ê
+	unordered_map<string,double> a = countWords(word);
 
+}
+
+unordered_map<string, double>Articlesystem::countWords(const vector<string> input)
+{
+	unordered_map<string, double> output;
+	for (int i = 0; i < input.size(); i++)
+	{
+
+		if (output.find(input[i]) == output.end())
+		{
+			output.insert(pair<string,double>(input[i], 1.0));
+		}
+		else
+		{
+			output[input[i]] += 1.0;
+		}
+	}
+	return output;
 }
 
 void Articlesystem::getStopWord()
