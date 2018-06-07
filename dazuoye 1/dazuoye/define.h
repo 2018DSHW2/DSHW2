@@ -16,9 +16,10 @@
 #include <cctype>
 #include <algorithm>
 #include <unordered_set>
-#include <hash_map>
+#include <unordered_map>
 #include <iomanip>
 #include<assert.h>
 #include<stack>
+#include <map>
 
 #define NUM_of_article  17000;

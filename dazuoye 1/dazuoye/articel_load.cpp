@@ -88,3 +88,12 @@ void Articlesystem::getStopWord()
 {
 
 }
+
+string Articlesystem::getStem(string  input)
+{
+	return string("a");
+
+}
+
+
+/////////////////////

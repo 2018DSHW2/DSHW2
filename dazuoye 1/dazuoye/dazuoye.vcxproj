@@ -91,6 +91,7 @@
     <ClInclude Include="Item_approach.h" />
     <ClInclude Include="similar_Recommend.h" />
     <ClInclude Include="mix_Recommend.h" />
+    <ClInclude Include="stem.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="define.h" />
   </ItemGroup>

@@ -1,11 +1,9 @@
-#pragma once
-
 #include<iostream>
-#include"article_load.h"
-#include"User.h"
-
-
-
+//#include"article_load.h"
+//#include"User.h"
+#include "stem.h"
+using namespace std;
+/*
 void run()
 {    
 	
@@ -16,13 +14,19 @@ void run()
 /*	ar->IndividualRecommendation();
 	ar->ItemRecommendation();
 	ar->similarRecommendation();	
-	ar->WriteResult();*/
+	ar->WriteResult();
+}/
+**/
+void test()
+{
+	string a = string("pencils");
+	cout<<stemword(a);
 }
 
 int main()
 {
-	cout<<"a";
-	
-	run();
+	test();
+//	run();
+	system("pause");
 	return 0;
 }
