@@ -32,13 +32,13 @@ public:
 
 	void loadUserTrain(string route );
 	void getsimilarReco();
-	void getStopWord();//»ñÈ¡¸ßÆµ´Ê±í£¬ÕÒÒ»¸ötxtÈ»ºóÈ¥³ı
-	vector<string> divideWords(string input);//·Ö´Ê
-	unordered_map<string, double> countWords(const vector<string> input);//¼ÆËãµ¥´ÊÊıÁ¿,È¥³ıÍ£ÓÃ´Ê
-	string getStem(string input);//»ñÈ¡´Ê¸É
+	void getStopWord();//è·å–é«˜é¢‘è¯è¡¨ï¼Œæ‰¾ä¸€ä¸ªtxtç„¶åå»é™¤
+	vector<string> divideWords(string input);//åˆ†è¯
+	unordered_map<string, double> countWords(const vector<string> input);//è®¡ç®—å•è¯æ•°é‡,å»é™¤åœç”¨è¯
+	string getStem(string input);//è·å–è¯å¹²
 
-	void updateArticle(Article *input);//¸üĞÂArticle£¬Íê³É·Ö´ÊµÈ
-//	bool loadArticle(string route );
+	void updateArticle(Article *input);//æ›´æ–°Articleï¼Œå®Œæˆåˆ†è¯ç­‰
+	bool loadArticle(string route );
 
 		
 	/*void IndividualRecommendation();
