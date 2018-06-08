@@ -52,13 +52,45 @@ void Articlesystem::loadUserTrain(string route ){
 	getsimilarReco();
 	return ;
 }
+
+//load "raw-data"
+bool Articlesystem::loadArticle(string route )
+{
+	ifstream file(route);
+
+	if (!file.is_open())
+	{
+		cout << "Load " << route << " failed." << endl;
+		return false;
+	}
+	int id_count = 0;
+
+	Article *p_article;
+	while (!file.eof())
+	{
+		string temp;
+
+		getline(file, temp, ',');
+		p_article->id = stoi(temp);
+		getline(file, temp, '"');
+		getline(file, temp, '"');
+		p_article->title = temp;
+		getline(file, temp, '"');
+		getline(file, temp, '"');
+		p_article->abstra = temp;
+		while (p_article->abstra[p_article->abstra.length() - 1] != '"')
+		{
+			getline(file, temp, '"');
+			p_article->abstra += temp;
+		}
+		articleList.push_back(p_article);
+	}
+	file.close();
+	cout << "Load " << route << " succesfully." << endl;
+	return true;
+}
+
 /*
-bool loadArticle(string route ){
-return 0;}
-
-	
-
-
 	
 	void IndividualRecommendation(){}
 	void ItemRecommendation(){}
@@ -93,7 +125,7 @@ void Articlesystem::updateArticle(Article* input)
 		{
 			continue;
 		}
-	}//ȥ��ͣ�ô�
+	}//È¥³ýÍ£ÓÃ´Ê
 	unordered_map<string,double> a = countWords(word);
 
 }
