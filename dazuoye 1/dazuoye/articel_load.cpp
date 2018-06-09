@@ -7,7 +7,6 @@ Articlesystem::Articlesystem()
 	getStopWord();
 }
 
-
 Articlesystem::~Articlesystem()
 {
 }
@@ -52,6 +51,7 @@ void Articlesystem::loadUserTrain(string route ){
 	getsimilarReco();
 	return ;
 }
+
 /*
 bool loadArticle(string route ){
 return 0;}
@@ -70,7 +70,6 @@ return 0;}
 	void showArticleList(){}
 	void WriteResult(){}*/
 
-
 void Articlesystem::getsimilarReco()
 {
 	//SocialRecommendSolution *s = new SocialRecommendSolution(userList, articleList.size());
@@ -82,6 +81,8 @@ void Articlesystem::getsimilarReco()
 void Articlesystem::updateArticle(Article* input)
 {
 	vector<string> word = divideWords(input->abstra);
+	vector<string> temp = divideWords(input->title);
+	word.insert(word.end(),temp.begin(),temp.end());
 	vector<string>::iterator itr;
 	for (itr = word.begin(); itr !=  word.end(); itr++)
 	{
@@ -94,23 +95,24 @@ void Articlesystem::updateArticle(Article* input)
 			continue;
 		}
 	}//È¥³ýÍ£ÓÃ´Ê
-	unordered_map<string,double> a = countWords(word);
+	input->wordsNum = word.size();
+	input->keyWords = countWords(word);
 
 }
 
-unordered_map<string, double>Articlesystem::countWords(const vector<string> input)
+unordered_map<string, int>Articlesystem::countWords(const vector<string> input)
 {
-	unordered_map<string, double> output;
+	unordered_map<string, int> output;
 	for (int i = 0; i < input.size(); i++)
 	{
 
 		if (output.find(input[i]) == output.end())
 		{
-			output.insert(pair<string,double>(input[i], 1.0));
+			output.insert(pair<string,int>(input[i], 1));
 		}
 		else
 		{
-			output[input[i]] += 1.0;
+			output[input[i]] += 1;
 		}
 	}
 	return output;
@@ -141,5 +143,68 @@ vector<string> Articlesystem::divideWords(string input)
 
 }
 
-
+void Articlesystem::countAll()
+{
+	dict.clear();
+	unordered_map<string, int>::iterator itr;
+	for (int i = 0; i < articleList.size(); i++)
+	{
+		unordered_map<string, int> temp = articleList.at(i)->keyWords;
+		for (itr = temp.begin(); itr != temp.end(); itr++)
+		{
+			if (dict.find(itr->first) == dict.end())
+			{
+				dict.insert(pair<string, int>(itr->first, itr->second));
+			}
+			else
+			{
+				dict[itr->first] += 1;
+			}
+		}
+	}
+}
 /////////////////////
+
+double Articlesystem::getSimiliarity(Article* input1, Article* input2)
+{
+	unordered_map<string, double> tf1,tf2;
+	tf1 = getTFIDF(input1);
+	tf2 = getTFIDF(input2);
+	unordered_map<string, double>::iterator itr;
+	double res  = 0;
+	for (itr = tf1.begin(); itr != tf1.end(); itr++)
+	{
+		if (tf2.find(itr->first) != tf2.end())
+		{
+			res += (itr->second * tf2.find(itr->first)->second);
+		}
+		else
+		{
+			continue;
+		}
+	}
+	return res / getModulus(tf1) / getModulus(tf2);
+}
+
+unordered_map<string, double> Articlesystem::getTFIDF(Article *input)
+{
+	unordered_map<string, double> output;
+	unordered_map<string, int>::iterator itr;
+	for (itr = input->keyWords.begin(); itr != input->keyWords.end(); itr++)
+	{
+		double temp = double(itr->second) / double(input->wordsNum) * log(double(articleList.size()) / double(dict.find(itr->first)->second + 1));//TF*IDF
+		output.insert(pair<string,double>(itr->first,temp));
+	}
+	return output;
+}
+
+double Articlesystem::getModulus(unordered_map<string, double>& input)
+{
+	double res = 0.0;
+	unordered_map<string, double>::iterator itr;
+	for (itr = input.begin(); itr != input.end(); itr++)
+	{
+		res += (itr->second * itr->second);
+	}
+	return sqrt(res);
+}
