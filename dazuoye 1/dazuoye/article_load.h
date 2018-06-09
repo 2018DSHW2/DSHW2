@@ -34,6 +34,7 @@ public:
 
 	void loadUserTrain(string route );
 	void getsimilarReco();
+
 	void getStopWord();//获取高频词表，找一个txt然后去除
 	vector<string> divideWords(string input);//分词
 	unordered_map<string, int> countWords(const vector<string> input);//计算单词数量,去除停用词
@@ -45,6 +46,13 @@ public:
 	unordered_map<string, double> getTFIDF(Article*);
 	double getModulus(unordered_map<string, double>&);//计算向量的摸长
 //	bool loadArticle(string route );
+	void getStopWord();//获取停用词表
+	vector<string> divideWords(string input);//分词
+	unordered_map<string, int> countWords(const vector<string> input);//计算每个单词在所有文档中出现的次数
+	string getStem(string input);//提取词干
+
+	void updateArticle(Article *input);//对article进行分词词干提取等操作
+	bool loadArticle(string route );
 
 		
 	/*void IndividualRecommendation();

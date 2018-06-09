@@ -55,10 +55,47 @@ void Articlesystem::loadUserTrain(string route ){
 /*
 bool loadArticle(string route ){
 return 0;}
+=======
+>>>>>>> 08559581f033cbb8c7b530b3ca07af5ba271187f
 
-	
+//load "raw-data"
+bool Articlesystem::loadArticle(string route )
+{
+	ifstream file(route);
 
+	if (!file.is_open())
+	{
+		cout << "Load " << route << " failed." << endl;
+		return false;
+	}
+	int id_count = 0;
 
+	Article *p_article;
+	while (!file.eof())
+	{
+		string temp;
+
+		getline(file, temp, ',');
+		p_article->id = stoi(temp);
+		getline(file, temp, '"');
+		getline(file, temp, '"');
+		p_article->title = temp;
+		getline(file, temp, '"');
+		getline(file, temp, '"');
+		p_article->abstra = temp;
+		while (p_article->abstra[p_article->abstra.length() - 1] != '"')
+		{
+			getline(file, temp, '"');
+			p_article->abstra += temp;
+		}
+		articleList.push_back(p_article);
+	}
+	file.close();
+	cout << "Load " << route << " succesfully." << endl;
+	return true;
+}
+
+/*
 	
 	void IndividualRecommendation(){}
 	void ItemRecommendation(){}
@@ -97,7 +134,7 @@ void Articlesystem::updateArticle(Article* input)
 	}//È¥³ýÍ£ÓÃ´Ê
 	input->wordsNum = word.size();
 	input->keyWords = countWords(word);
-
+	
 }
 
 unordered_map<string, int>Articlesystem::countWords(const vector<string> input)
