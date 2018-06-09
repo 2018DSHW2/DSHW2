@@ -131,7 +131,7 @@ void Articlesystem::updateArticle(Article* input)
 		{
 			continue;
 		}
-	}//ȥ��ͣ�ô�
+	}//È¥³ýÍ£ÓÃ´Ê
 	input->wordsNum = word.size();
 	input->keyWords = countWords(word);
 	
@@ -174,10 +174,40 @@ string Articlesystem::getStem(string  input)
 	return stemword(input);
 }
 
+//0609update
 vector<string> Articlesystem::divideWords(string input)
 {
 	vector<string> output;
-
+	string delimiters = " ,.;''""\n\r~!1234567890?@#$%^&*()_+|`-=/{}[]:/'<>";//分隔符
+	string temp;
+	int i = 0, j = 0;
+	while (i < input.length())
+	{
+		while (input[i] != delimiters[j])
+		{
+			if (j == delimiters.length() - 1)
+				break;
+			j++;
+		}
+		if (input[i] != delimiters[j])//input[i]不是分隔符
+		{
+			temp = +input[i];
+			j = 0;
+			i++;
+		}
+		else
+		{
+			if (temp.length() != 0)
+			{
+				output.push_back(temp);
+				temp = "";
+			}
+			j = 0;
+			i++;
+		}
+		
+	}
+	
 }
 
 void Articlesystem::countAll()
