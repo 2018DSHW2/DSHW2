@@ -25,4 +25,4 @@
 #define NUM_of_article  17000;
 #define STOPWORD_PATH "stopword.txt"
 
-#define MAX_CB_NUM  6//排序个数	
+#define MAX_CB_NUM  6//排序推荐个数	

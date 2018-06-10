@@ -35,13 +35,19 @@ void Articlesystem::loadUserTrain(string route ){
 		if (id_s != id_count)
 		{   
 			id_count = id_s;
-			p_user = new User(id_count);
+			p_user->id = id_count;
+			userList.push_back(p_user);
+			p_user->past.push_back(article_s);
+			/*p_user = new User(id_count);
 			userList.push_back(p_user);
 			p_user->addPastArticle(article_s);
+			*/
 		}
 		else
 		{
-			p_user->addPastArticle(article_s);
+			p_user->past.push_back(article_s);
+			/*
+			p_user->addPastArticle(article_s);*/
 		}
 	} 
 	/*for(int i=0;i<userList[0]->pastArticleList.size();i++)
@@ -254,6 +260,22 @@ double Articlesystem::getSimiliarity(Article* input1, Article* input2)
 	return res / getModulus(tf1) / getModulus(tf2);
 }
 
+double Articlesystem::getSimiliarity(int a,int b)
+{
+	return getSimiliarity(articleList[a], articleList[b]);
+}
+
+double Articlesystem::getSimiliarity(vector<int> a, int b)
+{
+	double res = 0;
+	for (int i = 0; i < a.size(); i++)
+	{
+		res += getSimiliarity(a[i], b);
+	}
+	return res;
+}
+
+
 unordered_map<string, double> Articlesystem::getTFIDF(Article *input)
 {
 	unordered_map<string, double> output;
@@ -275,4 +297,49 @@ double Articlesystem::getModulus(unordered_map<string, double>& input)
 		res += (itr->second * itr->second);
 	}
 	return sqrt(res);
+}
+
+
+void Articlesystem::updateUserSimiliar()
+{
+	for (int i = 0;i < userList.size();i++)
+	{
+		int temp1[MAX_CB_NUM] = { -1 };
+		double temp2[MAX_CB_NUM] = { -1 },min = -1,t;
+		for (int j = 0; j < articleList.size(); j++)
+		{
+			if (count(userList[i]->past.begin(), userList[i]->past.end(), j) == 0)//不是用户已有的
+			{
+				t = getSimiliarity(userList[i]->past, j);//相似度
+				if (t > min)//需要进行插入
+				{
+					for (int k = 0; k < MAX_CB_NUM; k++)
+					{
+						if (abs(temp2[k] - min) < 0.00001)
+						{
+							temp1[k] = j;
+							temp2[k] = t;
+							min = temp2[0];//更新最小值
+							for (int p = 1; p < MAX_CB_NUM; p++)
+							{
+								if (temp2[p] < min)
+								{
+									min = temp2[p];
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				continue;
+			}
+		}
+		userList[i]->recomment.clear();
+		for (int j = 0; j < MAX_CB_NUM; j++)
+		{
+			userList[i]->recomment.push_back(temp1[j]);
+		}//加入推荐文章		
+	}
 }
