@@ -1,8 +1,8 @@
 #include<iostream>
 //#include"article_load.h"
 //#include"User.h"
-#include "stem.h"
 #include "define.h"
+#include "article_load.h"
 using namespace std;
 /*
 void run()
@@ -20,6 +20,22 @@ void run()
 **/
 void test()
 {
+	Articlesystem* a = new Articlesystem();
+	a->getStopWord();
+	Article* temp;
+	temp = new Article;
+	temp->abstra = "I am a student.";
+	temp->id = 1;
+
+	a->articleList.push_back(temp);
+
+	temp = new Article;
+	temp->id = 2;
+	temp->abstra = "We are teachers.";
+	a->articleList.push_back(temp);
+
+	a->updateAllArticle();
+	
 	
 }
 

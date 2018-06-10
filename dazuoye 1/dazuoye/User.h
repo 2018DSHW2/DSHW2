@@ -6,7 +6,8 @@ class User
 {
 public:
 	int id;
-	vector<int> pastArticleList; //int equals WeightArticle but weight = 1 or 0
+	vector<int> pastArticleList;
+	vector<int> recomment;
 	
 public:
 	User();

@@ -5,6 +5,7 @@
 Articlesystem::Articlesystem()
 {
 	getStopWord();
+	userList.clear();
 }
 
 Articlesystem::~Articlesystem()
@@ -21,8 +22,9 @@ void Articlesystem::loadUserTrain(string route ){
 	
 	int id_count = 0;
 	
-	User *p_user;
-	while (!file.eof())
+	User *p_user,puser;
+	
+	/*while (!file.eof())
 	{
 		int id_s, article_s;
 		string temp; 
@@ -34,22 +36,23 @@ void Articlesystem::loadUserTrain(string route ){
 		
 		if (id_s != id_count)
 		{   
+			p_user = new User;
 			id_count = id_s;
-			p_user->id = id_count;
+			puser.id = id_count;
 			userList.push_back(p_user);
 			p_user->past.push_back(article_s);
 			/*p_user = new User(id_count);
 			userList.push_back(p_user);
 			p_user->addPastArticle(article_s);
-			*/
+			
 		}
 		else
 		{
 			p_user->past.push_back(article_s);
 			/*
-			p_user->addPastArticle(article_s);*/
-		}
-	} 
+			p_user->addPastArticle(article_s);/*;/
+		}		
+	} */
 	/*for(int i=0;i<userList[0]->pastArticleList.size();i++)
 	cout<<userList[0]->pastArticleList[i]<<endl;*/
 	file.close();
@@ -144,6 +147,15 @@ void Articlesystem::updateArticle(Article* input)
 
 }
 
+void Articlesystem::updateAllArticle()
+{
+	for (int i = 0; i < articleList.size(); i++)
+	{
+		updateArticle(articleList[i]);
+	}
+	return;
+}
+
 unordered_map<string, int>Articlesystem::countWords(const vector<string> input)
 {
 	unordered_map<string, int> output;
@@ -178,7 +190,7 @@ void Articlesystem::getStopWord()
 
 string Articlesystem::getStem(string  input)
 {
-	return stemword(input);
+	return  NULL;// stemword(input);
 }
 
 //0609update
@@ -214,6 +226,7 @@ vector<string> Articlesystem::divideWords(string input)
 		}
 		
 	}
+	return output;
 	
 }
 
@@ -308,9 +321,18 @@ void Articlesystem::updateUserSimiliar()
 		double temp2[MAX_CB_NUM] = { -1 },min = -1,t;
 		for (int j = 0; j < articleList.size(); j++)
 		{
-			if (count(userList[i]->past.begin(), userList[i]->past.end(), j) == 0)//不是用户已有的
+			bool sta = 1;
+			for (int k = 0; k < (userList[i])->pastArticleList.size(); k++)
 			{
-				t = getSimiliarity(userList[i]->past, j);//相似度
+				if (userList[i]->pastArticleList[k] == j)
+				{
+					sta = false;
+					break;
+				}
+			}
+			if (sta == true)//不是用户已有的
+			{
+				t = getSimiliarity(userList[i]->pastArticleList, j);//相似度
 				if (t > min)//需要进行插入
 				{
 					for (int k = 0; k < MAX_CB_NUM; k++)

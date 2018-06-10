@@ -19,7 +19,7 @@ User::~User()
 
 void User::addPastArticle(int id_a)
 {
-	pastArticleList.push_back(id_a);
+	this->pastArticleList.push_back(id_a);
 }
 
 

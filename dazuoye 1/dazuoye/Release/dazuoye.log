@@ -1,0 +1,32 @@
+﻿  articel_load.cpp
+articel_load.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(418): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(25): warning C4101: “p_user”: 未引用的局部变量
+articel_load.cpp(152): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(162): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(203): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(237): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(284): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(318): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(322): warning C4018: “<”: 有符号/无符号不匹配
+articel_load.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
+  Individual_Recommend.cpp
+  Item_approach.cpp
+  main.cpp
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(418): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(74): error C2011: “stemmer”:“struct”类型重定义
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(101): note: 参见“stemmer”的声明
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(102): error C2084: 函数“stemmer *create_stemmer(void)”已有主体
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(101): note: 参见“create_stemmer”的前一个定义
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(108): error C2084: 函数“void free_stemmer(stemmer *)”已有主体
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(107): note: 参见“free_stemmer”的前一个定义
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(118): error C2084: 函数“int cons(stemmer *,int)”已有主体
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(117): note: 参见“cons”的前一个定义
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(118): error C2027: 使用了未定义类型“stemmer”
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(101): note: 参见“stemmer”的声明
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(118): error C2227: “->b”的左边必须指向类/结构/联合/泛型类型
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(120): warning C4551: 缺少参数列表的函数调用
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(118): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
+  “C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.11.25503\bin\HostX86\x86\CL.exe”中的内部编译器错误
+    请选择 Visual C++ 
+  “帮助”菜单上的“技术支持”命令，或打开技术支持帮助文件来获得详细信息

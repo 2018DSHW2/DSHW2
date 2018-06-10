@@ -1,17 +1,11 @@
 #pragma once
-
-#include "define.h"
-//#include"User.h"
-#include"similar_Recommend.h"
 #include "stem.h"
+#include "define.h"
+#include"User.h"
+#include"similar_Recommend.h"
+
 using namespace std;
 
-typedef struct User
-{
-	int id;
-	vector<int> past;
-	vector<int> recomment;
-};
 
 typedef struct Article
 {
@@ -28,8 +22,9 @@ typedef struct Article
 class Articlesystem
 {
 public:
-    vector<User*> userList;
+    
 	vector<Article*> articleList;
+	vector<User*> userList;
 	unordered_set<string> stopWord;//停用词
 	unordered_map<string, int> dict;//词典，所有文章中所有出现单词出现的文档数目
 
@@ -55,12 +50,7 @@ public:
 	unordered_map<string, double> getTFIDF(Article*);//计算每个文本TF-IDF向量
 	double getModulus(unordered_map<string, double>&);//计算向量的摸长
 //	bool loadArticle(string route );
-	void getStopWord();//获取停用词表
-	vector<string> divideWords(string input);//分词
-	unordered_map<string, int> countWords(const vector<string> input);//计算每个单词在所有文档中出现的次数
-	string getStem(string input);//提取词干
-
-	void updateArticle(Article *input);//对article进行分词词干提取等操作
+	void updateAllArticle();
 	bool loadArticle(string route );
 
 	void updateUserSimiliar();//更新所有用户的推荐文章，基于内容
@@ -74,3 +64,5 @@ public:
 	void showArticleList();
 	void WriteResult();*/
 };
+
+
