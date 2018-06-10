@@ -135,6 +135,7 @@ void Articlesystem::updateArticle(Article* input)
 	input->wordsNum = word.size();
 	input->keyWords = countWords(word);
 	
+
 }
 
 unordered_map<string, int>Articlesystem::countWords(const vector<string> input)
