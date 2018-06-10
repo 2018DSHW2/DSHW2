@@ -65,7 +65,7 @@ void Articlesystem::loadUserTrain(string route ){
 bool loadArticle(string route ){
 return 0;}
 =======
->>>>>>> 08559581f033cbb8c7b530b3ca07af5ba271187f
+>>>08559581f033cbb8c7b530b3ca07af5ba271187f
 
 //load "raw-data"
 bool Articlesystem::loadArticle(string route )
@@ -82,6 +82,7 @@ bool Articlesystem::loadArticle(string route )
 	Article *p_article;
 	while (!file.eof())
 	{
+		p_article=new Article;
 		string temp;
 
 		getline(file, temp, ',');
@@ -89,15 +90,14 @@ bool Articlesystem::loadArticle(string route )
 		getline(file, temp, '"');
 		getline(file, temp, '"');
 		p_article->title = temp;
+		
 		getline(file, temp, '"');
 		getline(file, temp, '"');
 		p_article->abstra = temp;
-		while (p_article->abstra[p_article->abstra.length() - 1] != '"')
-		{
-			getline(file, temp, '"');
-			p_article->abstra += temp;
-		}
+		
 		articleList.push_back(p_article);
+		
+		cout<<"Article:"<<endl<<p_article->id <<' '<<p_article->title<<' '<<p_article->abstra <<endl;
 	}
 	file.close();
 	cout << "Load " << route << " succesfully." << endl;
@@ -197,7 +197,7 @@ string Articlesystem::getStem(string  input)
 vector<string> Articlesystem::divideWords(string input)
 {
 	vector<string> output;
-	string delimiters = " ,.;''""\n\r~!1234567890?@#$%^&*()_+|`-=/{}[]:/'<>";//分隔符
+	string delimiters = " ,.;''""\n\r~!\1234567890?@#$%^&*()_+|`-=/{}[]:/<>";//分隔符
 	string temp;
 	int i = 0, j = 0;
 	while (i < input.length())
@@ -210,13 +210,13 @@ vector<string> Articlesystem::divideWords(string input)
 		}
 		if (input[i] != delimiters[j])//input[i]不是分隔符
 		{
-			temp = +input[i];
+			temp += input[i];
 			j = 0;
 			i++;
 		}
 		else
 		{
-			if (temp.length() != 0)
+			if (temp.length() >1))//只分出长度大于1的词
 			{
 				output.push_back(temp);
 				temp = "";
@@ -227,7 +227,7 @@ vector<string> Articlesystem::divideWords(string input)
 		
 	}
 	return output;
-	
+
 }
 
 void Articlesystem::countAll()
