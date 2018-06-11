@@ -2,30 +2,13 @@
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(437): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(156): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(168): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(179): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(215): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(258): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(274): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(328): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(350): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(355): warning C4018: “<”: 有符号/无符号不匹配
-c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\utility(188): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(336): note: 参见对正在编译的函数 模板 实例化“std::pair<std::string,int>::pair<_Ty1&,_Ty2&,void,0>(_Other1,_Other2) noexcept(false)”的引用
-          with
-          [
-              _Ty1=std::string,
-              _Ty2=double,
-              _Other1=const std::string &,
-              _Other2=double &
-          ]
-  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(336): note: 参见对正在编译的函数 模板 实例化“std::pair<std::string,int>::pair<_Ty1&,_Ty2&,void,0>(_Other1,_Other2) noexcept(false)”的引用
-          with
-          [
-              _Ty1=std::string,
-              _Ty2=double,
-              _Other1=const std::string &,
-              _Other2=double &
-          ]
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(175): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(187): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(198): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(234): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(277): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(293): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(347): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(370): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(375): warning C4018: “<”: 有符号/无符号不匹配
   dazuoye.vcxproj -> C:\Users\xiaoxundong\source\repos\DSHW\DSHW\dazuoye 1\Debug\dazuoye.exe

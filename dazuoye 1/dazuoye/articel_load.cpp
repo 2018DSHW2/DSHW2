@@ -352,7 +352,7 @@ Article* Articlesystem::Combine(vector<int> input)
 			itr2 = (output->TFIDF).find(itr->first);
 			if (itr2 == output->TFIDF.end())
 			{
-				output->TFIDF.insert(pair<string, int>(itr->first, itr->second));
+				output->TFIDF.insert(pair<string, double>(itr->first, itr->second));
 			}
 			else
 			{
@@ -361,6 +361,7 @@ Article* Articlesystem::Combine(vector<int> input)
 		}
 		
 	}
+	output->Modulus = getModulus(output->TFIDF);
 	return output;
 }
 
@@ -369,7 +370,7 @@ void Articlesystem::updateUserSimiliar()
 	for (int i = 0;i < userList.size();i++)
 	{
 		Article* com = Combine(userList[i]->pastArticleList);
-		int temp1[MAX_CB_NUM] = { -1 };
+		int temp1[MAX_CB_NUM] = { -1 },min_id = 0;
 		double temp2[MAX_CB_NUM] = { -1 },min = -1,t;
 		for (int j = 0; j < articleList.size(); j++)
 		{
@@ -378,20 +379,15 @@ void Articlesystem::updateUserSimiliar()
 				t = getSimiliarity(com, articleList[j]);//相似度
 				if (t > min)//需要进行插入
 				{
-					for (int k = 0; k < MAX_CB_NUM; k++)
+					temp1[min_id] = j;
+					temp2[min_id] = t;					
+					min = temp2[0];
+					for (int p = 1; p < MAX_CB_NUM; p++)
 					{
-						if (abs(temp2[k] - min) < 0.00001)
+						if (temp2[p] < min)
 						{
-							temp1[k] = j;
-							temp2[k] = t;
-							min = temp2[0];//更新最小值
-							for (int p = 1; p < MAX_CB_NUM; p++)
-							{
-								if (temp2[p] < min)
-								{
-									min = temp2[p];
-								}
-							}
+							min = temp2[p];
+							min_id = p;
 						}
 					}
 				}
@@ -402,9 +398,13 @@ void Articlesystem::updateUserSimiliar()
 			}
 		}
 		userList[i]->recomment.clear();
+		delete(com);
 		for (int j = 0; j < MAX_CB_NUM; j++)
 		{
-			userList[i]->recomment.push_back(temp1[j]);
-		}//加入推荐文章		
+			if (temp1[j] != -1)
+			{
+				userList[i]->recomment.push_back(temp1[j] + 1);
+			}			
+		}//加入推荐文章
 	}
 }
