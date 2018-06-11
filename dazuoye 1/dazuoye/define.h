@@ -23,6 +23,9 @@
 #include <map>
 
 #define NUM_of_article  17000;
-#define STOPWORD_PATH "stopword.txt"
+#define STOPWORD_PATH "data/stopword.txt"
+#define ARTICLE_PATH "data/raw-data.txt"
+#define TEST_PATH "data/test.txt"
+#define USERTRAIN_PATH "data/user-info-train.txt"
 
-#define MAX_CB_NUM  6//排序推荐个数	
+#define MAX_CB_NUM  5//排序推荐个数	

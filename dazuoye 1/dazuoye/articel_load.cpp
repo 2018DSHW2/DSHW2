@@ -1,5 +1,5 @@
-#pragma once
 
+#include "stem.h"
 #include"article_load.h"
 
 Articlesystem::Articlesystem()
@@ -22,54 +22,55 @@ void Articlesystem::loadUserTrain(string route ){
 	
 	int id_count = 0;
 	
-	User *p_user,puser;
+	User *p_user;
 	
-	/*while (!file.eof())
+	while (!file.eof())
 	{
 		int id_s, article_s;
 		string temp; 
 		
+		
 		getline(file, temp, ',');
+		if (temp == "")
+		{
+			break;
+		}
 		id_s = stoi(temp);
 		getline(file, temp);
 		article_s = stoi(temp);
 		
 		if (id_s != id_count)
 		{   
-			p_user = new User;
+			p_user = new User();
 			id_count = id_s;
-			puser.id = id_count;
+			p_user->id = id_count;
 			userList.push_back(p_user);
-			p_user->past.push_back(article_s);
-			/*p_user = new User(id_count);
-			userList.push_back(p_user);
-			p_user->addPastArticle(article_s);
-			
+			p_user->pastArticleList.push_back(article_s);
+			AddUserArticle(p_user->id, article_s);
 		}
 		else
 		{
-			p_user->past.push_back(article_s);
-			/*
-			p_user->addPastArticle(article_s);/*;/
+			p_user->pastArticleList.push_back(article_s);
+			AddUserArticle(p_user->id, article_s);
 		}		
-	} */
+	} 
 	/*for(int i=0;i<userList[0]->pastArticleList.size();i++)
 	cout<<userList[0]->pastArticleList[i]<<endl;*/
 	file.close();
 	cout << "Load " << route << " succesfully." << endl;
-	getsimilarReco();
+//	getsimilarReco();
 	return ;
 }
 
-/*
-bool loadArticle(string route ){
-return 0;}
-=======
->>>08559581f033cbb8c7b530b3ca07af5ba271187f
+void Articlesystem::AddUserArticle(const int userid,const int articleid)
+{
+	articleList[articleid - 1]->users.insert(userid);
+}
 
-//load "raw-data"
+
 bool Articlesystem::loadArticle(string route )
 {
+	getStopWord();
 	ifstream file(route);
 
 	if (!file.is_open())
@@ -77,15 +78,19 @@ bool Articlesystem::loadArticle(string route )
 		cout << "Load " << route << " failed." << endl;
 		return false;
 	}
-	int id_count = 0;
 
 	Article *p_article;
 	while (!file.eof())
 	{
+
 		p_article=new Article;
 		string temp;
 
 		getline(file, temp, ',');
+		if (temp == "")
+		{
+			break;
+		}
 		p_article->id = stoi(temp);
 		getline(file, temp, '"');
 		getline(file, temp, '"');
@@ -97,8 +102,13 @@ bool Articlesystem::loadArticle(string route )
 		
 		articleList.push_back(p_article);
 		
-		cout<<"Article:"<<endl<<p_article->id <<' '<<p_article->title<<' '<<p_article->abstra <<endl;
+		cout<<p_article->id <<endl;
+		updateArticle(p_article);
+		//p_article->abstra.clear();
+		//p_article->title.clear();
+		
 	}
+	countAll();
 	file.close();
 	cout << "Load " << route << " succesfully." << endl;
 	return true;
@@ -130,7 +140,7 @@ void Articlesystem::updateArticle(Article* input)
 	vector<string> temp = divideWords(input->title);
 	word.insert(word.end(),temp.begin(),temp.end());
 	vector<string>::iterator itr;
-	for (itr = word.begin(); itr !=  word.end(); itr++)
+	for (itr = word.begin(); itr !=  word.end(); )
 	{
 		if (stopWord.find(*itr) != stopWord.end())
 		{
@@ -138,11 +148,17 @@ void Articlesystem::updateArticle(Article* input)
 		}
 		else
 		{
+			itr++;
 			continue;
 		}
-	}//È¥³ýÍ£ÓÃ´Ê
-	input->wordsNum = word.size();
-	input->keyWords = countWords(word);
+	}//去除停用词
+	temp.clear();
+	for (int i = 0; i < word.size(); i++)
+	{
+		temp.push_back(stemword(word[i]));
+	}
+	input->wordsNum = temp.size();
+	input->keyWords = countWords(temp);
 	
 
 }
@@ -153,6 +169,7 @@ void Articlesystem::updateAllArticle()
 	{
 		updateArticle(articleList[i]);
 	}
+	countAll();
 	return;
 }
 
@@ -188,16 +205,11 @@ void Articlesystem::getStopWord()
 
 }
 
-string Articlesystem::getStem(string  input)
-{
-	return  NULL;// stemword(input);
-}
-
 //0609update
 vector<string> Articlesystem::divideWords(string input)
 {
 	vector<string> output;
-	string delimiters = " ,.;''""\n\r~!\1234567890?@#$%^&*()_+|`-=/{}[]:/<>";//分隔符
+	string delimiters = " ,.;''""\n\\\r~!\1234567890?@#$%^&*()_+|`-=/{}[]:/<>";//分隔符
 	string temp;
 	int i = 0, j = 0;
 	while (i < input.length())
@@ -210,13 +222,22 @@ vector<string> Articlesystem::divideWords(string input)
 		}
 		if (input[i] != delimiters[j])//input[i]不是分隔符
 		{
-			temp += input[i];
+			if (input[i] >= 'A' && input[i] <= 'Z')
+			{
+				temp += (input[i] - 'A' + 'a');
+
+			}
+			else
+			{
+				temp += input[i];
+			}
+			
 			j = 0;
 			i++;
 		}
 		else
 		{
-			if (temp.length() >1))//只分出长度大于1的词
+			if (temp.length() >=1)//只分出长度大于1的词
 			{
 				output.push_back(temp);
 				temp = "";
@@ -248,46 +269,34 @@ void Articlesystem::countAll()
 				dict[itr->first] += 1;
 			}
 		}
+	}//构建词典
+
+	for (int i = 0; i < articleList.size(); i++)
+	{
+		articleList[i]->TFIDF = getTFIDF(articleList[i]);
+		articleList[i]->Modulus = getModulus(articleList[i]->TFIDF);
 	}
+	//计算TFIDF值
 }
 /////////////////////
 
 double Articlesystem::getSimiliarity(Article* input1, Article* input2)
 {
-	unordered_map<string, double> tf1,tf2;
-	tf1 = getTFIDF(input1);
-	tf2 = getTFIDF(input2);
 	unordered_map<string, double>::iterator itr;
 	double res  = 0;
-	for (itr = tf1.begin(); itr != tf1.end(); itr++)
+	for (itr = input1->TFIDF.begin(); itr != input1->TFIDF.end(); itr++)
 	{
-		if (tf2.find(itr->first) != tf2.end())
+		if (input2->TFIDF.find(itr->first) != input2->TFIDF.end())
 		{
-			res += (itr->second * tf2.find(itr->first)->second);
+			res += (itr->second * input2->TFIDF.find(itr->first)->second);
 		}
 		else
 		{
 			continue;
 		}
 	}
-	return res / getModulus(tf1) / getModulus(tf2);
+	return res / input1->Modulus / input2->Modulus;
 }
-
-double Articlesystem::getSimiliarity(int a,int b)
-{
-	return getSimiliarity(articleList[a], articleList[b]);
-}
-
-double Articlesystem::getSimiliarity(vector<int> a, int b)
-{
-	double res = 0;
-	for (int i = 0; i < a.size(); i++)
-	{
-		res += getSimiliarity(a[i], b);
-	}
-	return res;
-}
-
 
 unordered_map<string, double> Articlesystem::getTFIDF(Article *input)
 {
@@ -312,27 +321,42 @@ double Articlesystem::getModulus(unordered_map<string, double>& input)
 	return sqrt(res);
 }
 
+Article* Articlesystem::Combine(vector<int> input)
+{
+	Article* output = new Article;
+	output->TFIDF.clear();
+	for (int i = 0; i < input.size(); i++)
+	{
+		unordered_map<string, double>::iterator itr,itr2;
+		for (itr = articleList[input[i] - 1]->TFIDF.begin();itr != articleList[input[i] - 1]->TFIDF.end();itr++)
+		{
+			itr2 = (output->TFIDF).find(itr->first);
+			if (itr2 == output->TFIDF.end())
+			{
+				output->TFIDF.insert(pair<string, int>(itr->first, itr->second));
+			}
+			else
+			{
+				itr2->second += itr->second;
+			}
+		}
+		
+	}
+	return output;
+}
 
 void Articlesystem::updateUserSimiliar()
 {
 	for (int i = 0;i < userList.size();i++)
 	{
+		Article* com = Combine(userList[i]->pastArticleList);
 		int temp1[MAX_CB_NUM] = { -1 };
 		double temp2[MAX_CB_NUM] = { -1 },min = -1,t;
 		for (int j = 0; j < articleList.size(); j++)
 		{
-			bool sta = 1;
-			for (int k = 0; k < (userList[i])->pastArticleList.size(); k++)
+			if(articleList[j]->users.find(userList[i]->id ) == articleList[j]->users.end())//不是用户已有的
 			{
-				if (userList[i]->pastArticleList[k] == j)
-				{
-					sta = false;
-					break;
-				}
-			}
-			if (sta == true)//不是用户已有的
-			{
-				t = getSimiliarity(userList[i]->pastArticleList, j);//相似度
+				t = getSimiliarity(com, articleList[j]);//相似度
 				if (t > min)//需要进行插入
 				{
 					for (int k = 0; k < MAX_CB_NUM; k++)

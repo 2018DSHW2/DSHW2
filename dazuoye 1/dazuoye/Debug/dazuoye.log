@@ -1,40 +1,31 @@
 ﻿  articel_load.cpp
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(78): warning C4091: “typedef ”: 没有声明变量时忽略“stemmer”的左侧
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(438): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(25): warning C4101: “p_user”: 未引用的局部变量
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(152): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(162): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(203): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(237): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(284): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(318): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(322): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
-  正在编译...
-  main.cpp
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(78): warning C4091: “typedef ”: 没有声明变量时忽略“stemmer”的左侧
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(438): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
-main.obj : error LNK2005: "int __cdecl cons(struct stemmer *,int)" (?cons@@YAHPAUstemmer@@H@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "struct stemmer * __cdecl create_stemmer(void)" (?create_stemmer@@YAPAUstemmer@@XZ) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl cvc(struct stemmer *,int)" (?cvc@@YAHPAUstemmer@@H@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl doublec(struct stemmer *,int)" (?doublec@@YAHPAUstemmer@@H@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl ends(struct stemmer *,char *)" (?ends@@YAHPAUstemmer@@PAD@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl free_stemmer(struct stemmer *)" (?free_stemmer@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl m(struct stemmer *)" (?m@@YAHPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl r(struct stemmer *,char *)" (?r@@YAXPAUstemmer@@PAD@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl setto(struct stemmer *,char *)" (?setto@@YAXPAUstemmer@@PAD@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl stem(struct stemmer *,char *,int)" (?stem@@YAHPAUstemmer@@PADH@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl stemword(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?stemword@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step1ab(struct stemmer *)" (?step1ab@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step1c(struct stemmer *)" (?step1c@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step2(struct stemmer *)" (?step2@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step3(struct stemmer *)" (?step3@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step4(struct stemmer *)" (?step4@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "void __cdecl step5(struct stemmer *)" (?step5@@YAXPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-main.obj : error LNK2005: "int __cdecl vowelinstem(struct stemmer *)" (?vowelinstem@@YAHPAUstemmer@@@Z) 已经在 articel_load.obj 中定义
-C:\Users\xiaoxundong\source\repos\DSHW\DSHW\dazuoye 1\Debug\dazuoye.exe : fatal error LNK1169: 找到一个或多个多重定义的符号
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(437): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(156): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(168): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(179): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(215): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(258): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(274): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(328): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(350): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(355): warning C4018: “<”: 有符号/无符号不匹配
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\utility(188): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(336): note: 参见对正在编译的函数 模板 实例化“std::pair<std::string,int>::pair<_Ty1&,_Ty2&,void,0>(_Other1,_Other2) noexcept(false)”的引用
+          with
+          [
+              _Ty1=std::string,
+              _Ty2=double,
+              _Other1=const std::string &,
+              _Other2=double &
+          ]
+  c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(336): note: 参见对正在编译的函数 模板 实例化“std::pair<std::string,int>::pair<_Ty1&,_Ty2&,void,0>(_Other1,_Other2) noexcept(false)”的引用
+          with
+          [
+              _Ty1=std::string,
+              _Ty2=double,
+              _Other1=const std::string &,
+              _Other2=double &
+          ]
+  dazuoye.vcxproj -> C:\Users\xiaoxundong\source\repos\DSHW\DSHW\dazuoye 1\Debug\dazuoye.exe

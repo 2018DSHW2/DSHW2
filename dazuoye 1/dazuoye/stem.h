@@ -5,7 +5,6 @@ stemword(input);
 input 为一个string
 返回值也是一个string
 */
-
 /* This is the Porter stemming algorithm, coded up as thread-safe ANSI C
 by the author.
 
@@ -44,20 +43,17 @@ basic version for details)
 
 #include <stdlib.h>  /* for malloc, free */
 #include <string.h>  /* for memcmp, memmove */
-#include <stdio.h>
-#include <ctype.h>       /* for isupper, islower, tolower */
-
-#include <string>
-#include <string.h>
-using namespace std;
-
-
-#define LETTER(ch) (isupper(ch) || islower(ch))
 
 /* You will probably want to move the following declarations to a central
 header file.
 */
 
+struct stemmer;
+
+extern struct stemmer * create_stemmer(void);
+extern void free_stemmer(struct stemmer * z);
+
+extern int stem(struct stemmer * z, char * b, int k);
 
 
 
@@ -67,12 +63,11 @@ header file.
 #define TRUE 1
 #define FALSE 0
 
-/* stemmer is a ure for a few local bits of data,
+/* stemmer is a structure for a few local bits of data,
 */
-/**/
-typedef struct stemmer
-{
-	char *b;       /* buffer for word to be stemmed */
+
+struct stemmer {
+	char * b;       /* buffer for word to be stemmed */
 	int k;          /* offset to the end of the string */
 	int j;          /* a general offset into the string */
 };
@@ -89,7 +84,7 @@ should be done before stem(...) is called.
 
 Typical usage is:
 
-stemmer * z = create_stemmer();
+struct stemmer * z = create_stemmer();
 char b[] = "pencils";
 int res = stem(z, b, 6);
 /- stem the 7 characters of b[0] to b[6]. The result, res,
@@ -98,13 +93,13 @@ free_stemmer(z);
 */
 
 
-stemmer* create_stemmer(void)
+extern struct stemmer * create_stemmer(void)
 {
-	return (stemmer *)malloc(sizeof(stemmer));
+	return (struct stemmer *) malloc(sizeof(struct stemmer));
 	/* assume malloc succeeds */
 }
 
-void free_stemmer(stemmer * z)
+extern void free_stemmer(struct stemmer * z)
 {
 	free(z);
 }
@@ -114,7 +109,7 @@ void free_stemmer(stemmer * z)
 and below we drop 'z->' in comments.
 */
 
-int cons(stemmer * z, int i)
+static int cons(struct stemmer * z, int i)
 {
 	switch (z->b[i])
 	{
@@ -135,7 +130,7 @@ presence,
 ....
 */
 
-int m(stemmer * z)
+static int m(struct stemmer * z)
 {
 	int n = 0;
 	int i = 0;
@@ -168,7 +163,7 @@ int m(stemmer * z)
 
 /* vowelinstem(z) is TRUE <=> 0,...j contains a vowel */
 
-int vowelinstem(stemmer * z)
+static int vowelinstem(struct stemmer * z)
 {
 	int j = z->j;
 	int i; for (i = 0; i <= j; i++) if (!cons(z, i)) return TRUE;
@@ -177,7 +172,7 @@ int vowelinstem(stemmer * z)
 
 /* doublec(z, j) is TRUE <=> j,(j-1) contain a double consonant. */
 
-int doublec(stemmer * z, int j)
+static int doublec(struct stemmer * z, int j)
 {
 	char * b = z->b;
 	if (j < 1) return FALSE;
@@ -194,7 +189,7 @@ snow, box, tray.
 
 */
 
-int cvc(stemmer * z, int i)
+static int cvc(struct stemmer * z, int i)
 {
 	if (i < 2 || !cons(z, i) || cons(z, i - 1) || !cons(z, i - 2)) return FALSE;
 	{  int ch = z->b[i];
@@ -205,7 +200,7 @@ int cvc(stemmer * z, int i)
 
 /* ends(z, s) is TRUE <=> 0,...k ends with the string s. */
 
-int ends(stemmer * z, char * s)
+static int ends(struct stemmer * z, char * s)
 {
 	int length = s[0];
 	char * b = z->b;
@@ -220,7 +215,7 @@ int ends(stemmer * z, char * s)
 /* setto(z, s) sets (j+1),...k to the characters in the string s, readjusting
 k. */
 
-void setto(stemmer * z, char * s)
+static void setto(struct stemmer * z, char * s)
 {
 	int length = s[0];
 	int j = z->j;
@@ -230,7 +225,7 @@ void setto(stemmer * z, char * s)
 
 /* r(z, s) is used further down. */
 
-void r(stemmer * z, char * s) { if (m(z) > 0) setto(z, s); }
+static void r(struct stemmer * z, char * s) { if (m(z) > 0) setto(z, s); }
 
 /* step1ab(z) gets rid of plurals and -ed or -ing. e.g.
 
@@ -254,7 +249,7 @@ meetings  ->  meet
 
 */
 
-void step1ab(stemmer * z)
+static void step1ab(struct stemmer * z)
 {
 	char * b = z->b;
 	if (b[z->k] == 's')
@@ -284,7 +279,7 @@ void step1ab(stemmer * z)
 
 /* step1c(z) turns terminal y to i when there is another vowel in the stem. */
 
-void step1c(stemmer * z)
+static void step1c(struct stemmer * z)
 {
 	if (ends(z, "\01" "y") && vowelinstem(z)) z->b[z->k] = 'i';
 }
@@ -294,7 +289,7 @@ void step1c(stemmer * z)
 -ation) maps to -ize etc. note that the string before the suffix must give
 m(z) > 0. */
 
-void step2(stemmer * z) {
+static void step2(struct stemmer * z) {
 	switch (z->b[z->k - 1])
 	{
 	case 'a': if (ends(z, "\07" "ational")) { r(z, "\03" "ate"); break; }
@@ -337,7 +332,7 @@ void step2(stemmer * z) {
 
 /* step3(z) deals with -ic-, -full, -ness etc. similar strategy to step2. */
 
-void step3(stemmer * z) {
+static void step3(struct stemmer * z) {
 	switch (z->b[z->k])
 	{
 	case 'e': if (ends(z, "\05" "icate")) { r(z, "\02" "ic"); break; }
@@ -356,7 +351,7 @@ void step3(stemmer * z) {
 
 /* step4(z) takes off -ant, -ence etc., in context <c>vcvc<v>. */
 
-void step4(stemmer * z)
+static void step4(struct stemmer * z)
 {
 	switch (z->b[z->k - 1])
 	{
@@ -388,7 +383,7 @@ void step4(stemmer * z)
 /* step5(z) removes a final -e if m(z) > 1, and changes -ll to -l if
 m(z) > 1. */
 
-void step5(stemmer * z)
+static void step5(struct stemmer * z)
 {
 	char * b = z->b;
 	z->j = z->k;
@@ -407,7 +402,7 @@ the new end-point of the string, k'. Stemming never increases word
 length, so 0 <= k' <= k.
 */
 
-int stem(stemmer * z, char * b, int k)
+extern int stem(struct stemmer * z, char * b, int k)
 {
 	if (k <= 1) return k; /*-DEPARTURE-*/
 	z->b = b; z->k = k; /* copy the parameters into z */
@@ -426,23 +421,26 @@ int stem(stemmer * z, char * b, int k)
 
 /*--------------------stemmer definition ends here------------------------*/
 
-
-#define INC 50           /* size units in which s is increased */
-//int i_max = INC;  /* maximum offset in s */
+#include <stdio.h>
+#include <stdlib.h>      /* for malloc, free */
+#include <ctype.h>       /* for isupper, islower, tolower */
+#include <string.h>
+#include <string>
+using namespace std;
+#define LETTER(ch) (isupper(ch) || islower(ch))
 
 
 string stemword(string input)
 {
-	stemmer * z = create_stemmer();
-	char* s = (char*)malloc(input.length() + 1);
+	struct stemmer * z = create_stemmer();
+	char *s = (char *)malloc(input.length() + 1);
 	for (int i = 0; i < input.length(); i++)
 	{
 		s[i] = input[i];
 	}
-	s[input.length()] = '\0';
-
+	s[input.length()] = 0;
 	int end = stem(z, s, input.length() - 1) + 1;
-	/* the previous line calls the stemmer and uses its result to
-	zero-terminate the string in s */
+	free_stemmer(z);
 	return input.substr(0, end);
+
 }
