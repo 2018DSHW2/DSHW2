@@ -30,40 +30,39 @@ class Articlesystem
 public:
     vector<User*> userList;
 	vector<Article*> articleList;
-	unordered_set<string> stopWord;//Í£ÓÃ´Ê
-	unordered_map<string, int> dict;//´Êµä£¬ËùÓĞÎÄÕÂÖĞËùÓĞ³öÏÖµ¥´Ê³öÏÖµÄÎÄµµÊıÄ¿
+	unordered_set<string> stopWord;//åœç”¨è¯
+	unordered_map<string, int> dict;//è¯å…¸ï¼Œæ‰€æœ‰æ–‡ç« ä¸­æ‰€æœ‰å‡ºç°å•è¯å‡ºç°çš„æ–‡æ¡£æ•°ç›®
 
 
 public:
 	Articlesystem();
 	~Articlesystem();
 
-
+	void outputTFIDFresult();//è¾“å‡ºTFIDFçš„æ¨èç»“æœ
 	void loadUserTrain(string route );
 	void getsimilarReco();
 
-	void getStopWord();//»ñÈ¡¸ßÆµ´Ê±í£¬ÕÒÒ»¸ötxtÈ»ºóÈ¥³ı
-	vector<string> divideWords(string input);//·Ö´Ê
-	unordered_map<string, int> countWords(const vector<string> input);//¼ÆËãµ¥´ÊÊıÁ¿,È¥³ıÍ£ÓÃ´Ê
-	string getStem(string input);//»ñÈ¡´Ê¸É
+	void getStopWord();//è·å–é«˜é¢‘è¯è¡¨ï¼Œæ‰¾ä¸€ä¸ªtxtç„¶åå»é™¤
+	vector<string> divideWords(string input);//åˆ†è¯
+	unordered_map<string, int> countWords(const vector<string> input);//è®¡ç®—å•è¯æ•°é‡,å»é™¤åœç”¨è¯
+	string getStem(string input);//è·å–è¯å¹²
 
-	void updateArticle(Article *input);//¸üĞÂArticle£¬Íê³É·Ö´ÊµÈ
-	void countAll();//ËùÓĞÎÄµµËùÓĞµ¥´Ê³öÏÖÇé¿ö
-	double getSimiliarity(Article*,Article*);//¼ÆËãÁ½¸öÎÄµµÏàËÆ¶È
-	double getSimiliarity(int,int);//¼ÆËãÁ½¸öÎÄµµÏàËÆ¶È
-	double getSimiliarity(vector<int>, int);//¼ÆËãÒ»¸öÎÄµµºÍÒ»ÏµÁĞÎÄµµÏàËÆ¶ÈÏàËÆ¶È
-	unordered_map<string, double> getTFIDF(Article*);//¼ÆËãÃ¿¸öÎÄ±¾TF-IDFÏòÁ¿
-	double getModulus(unordered_map<string, double>&);//¼ÆËãÏòÁ¿µÄÃş³¤
-//	bool loadArticle(string route );
-	void getStopWord();//»ñÈ¡Í£ÓÃ´Ê±í
-	vector<string> divideWords(string input);//·Ö´Ê
-	unordered_map<string, int> countWords(const vector<string> input);//¼ÆËãÃ¿¸öµ¥´ÊÔÚËùÓĞÎÄµµÖĞ³öÏÖµÄ´ÎÊı
-	string getStem(string input);//ÌáÈ¡´Ê¸É
+	void updateArticle(Article *input);//æ›´æ–°Articleï¼Œå®Œæˆåˆ†è¯ç­‰
+	void countAll();//æ‰€æœ‰æ–‡æ¡£æ‰€æœ‰å•è¯å‡ºç°æƒ…å†µ
+	double getSimiliarity(Article*,Article*);//è®¡ç®—ä¸¤ä¸ªæ–‡æ¡£ç›¸ä¼¼åº¦
+	double getSimiliarity(int,int);//è®¡ç®—ä¸¤ä¸ªæ–‡æ¡£ç›¸ä¼¼åº¦
+	double getSimiliarity(vector<int>, int);//è®¡ç®—ä¸€ä¸ªæ–‡æ¡£å’Œä¸€ç³»åˆ—æ–‡æ¡£ç›¸ä¼¼åº¦ç›¸ä¼¼åº¦
+	unordered_map<string, double> getTFIDF(Article*);//è®¡ç®—æ¯ä¸ªæ–‡æœ¬TF-IDFå‘é‡
+	double getModulus(unordered_map<string, double>&);//è®¡ç®—å‘é‡çš„æ‘¸
+	void getStopWord();//è·å–åœç”¨è¯è¡¨
+	vector<string> divideWords(string input);//åˆ†è¯
+	unordered_map<string, int> countWords(const vector<string> input);//è®¡ç®—æ¯ä¸ªå•è¯åœ¨æ‰€æœ‰æ–‡æ¡£ä¸­å‡ºç°çš„æ¬¡æ•°
+	string getStem(string input);//æå–è¯å¹²
 
-	void updateArticle(Article *input);//¶Ôarticle½øĞĞ·Ö´Ê´Ê¸ÉÌáÈ¡µÈ²Ù×÷
+	void updateArticle(Article *input);//å¯¹articleè¿›è¡Œåˆ†è¯è¯å¹²æå–ç­‰æ“ä½œ
 	bool loadArticle(string route );
 
-	void updateUserSimiliar();//¸üĞÂËùÓĞÓÃ»§µÄÍÆ¼öÎÄÕÂ£¬»ùÓÚÄÚÈİ
+	void updateUserSimiliar();//æ›´æ–°æ‰€æœ‰ç”¨æˆ·çš„æ¨èæ–‡ç« ï¼ŒåŸºäºå†…å®¹
 
 		
 	/*void IndividualRecommendation();
