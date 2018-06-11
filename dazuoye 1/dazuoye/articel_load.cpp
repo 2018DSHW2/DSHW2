@@ -185,7 +185,7 @@ string Articlesystem::getStem(string  input)
 vector<string> Articlesystem::divideWords(string input)
 {
 	vector<string> output;
-	string delimiters = " ,.;''""\n\r~!\1234567890?@#$%^&*()_+|`-=/{}[]:/<>";//分隔符
+	string delimiters = " ,.;''""\n\r~!\1234567890?@#$%^&*()_+|`=/{}[]:/<>";//分隔符
 	string temp;
 	int i = 0, j = 0;
 	while (i < input.length())
