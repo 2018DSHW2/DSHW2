@@ -10,6 +10,25 @@ Articlesystem::Articlesystem()
 Articlesystem::~Articlesystem()
 {
 }
+
+void Articlesystem::outputTFIDFresult()
+{
+	vector<User*>::iterator it1;
+	int i = 1;
+	ofstream outFile("item_result.txt");
+	for (auto it1:  userList)
+	{
+		outFile << i << ',';
+		i++;
+		vector<User*>::iterator it2;
+		for (auto it2 : it1->recomment)
+			outFile << it2 << ';';
+		outFile << endl;
+	}
+	outFile.close();
+	cout << "get TFIDF Results succesfully." << endl;
+}
+
 void Articlesystem::loadUserTrain(string route ){
 	ifstream file(route);
 
