@@ -28,10 +28,12 @@ mixReco::mixReco()
 		outFile << article[1] << ';';
 		getline(inFile2, article[2], ';');
 		getline(inFile2, article[3], ';');
-		getline(inFile2, article[4]);
+		getline(inFile2, article[4],';');
 		outFile << article[2] << ';';
 		outFile << article[3] << ';';
 		outFile << article[4] << endl;
+		getline(inFile1, article[1]);
+		getline(inFile2, article[1]);
 	}
 	inFile1.close();
 	inFile2.close();
