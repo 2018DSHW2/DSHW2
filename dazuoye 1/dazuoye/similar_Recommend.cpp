@@ -1,4 +1,4 @@
-﻿#include"similar_Recommend.h"
+#include"similar_Recommend.h"
 similarReco::similarReco (){}
 similarReco::~similarReco(){}
 
@@ -101,6 +101,11 @@ double similarReco::in(double a,int id,int reduce){
 	double temp;
 	int tt;
 	int check=0;
+
+	if(a>0.9999999){ 
+		a=-10;
+	}
+	
 	for(int i=0;i<1000;i++){
 		if(id==list[i].id){
 			list[i].weight=list[i].weight+a;
@@ -108,11 +113,12 @@ double similarReco::in(double a,int id,int reduce){
 			break;
 		}
 	}
-
 	if(check!=1){
 		list[reduce].id=id;
 		list[reduce].weight=a;
+		
 	}
+	
 	for(int i=0;i<reduce;i++){
 		for(int j=0;j<reduce-i;j++){
 			if(list[j].weight<list[j+1].weight){
@@ -125,6 +131,7 @@ double similarReco::in(double a,int id,int reduce){
 			}
 		}
 	}
+	
 	return 0;
 }
 void similarReco::getuserList( vector<User*>& userList){
@@ -150,7 +157,8 @@ void similarReco::getuserList( vector<User*>& userList){
 
 
 	for(int num=1;num<TRY_TIME+1;num++){
-		cout<<"tt";
+    //for(int num=117;num<118;num++){
+		cout<<num<<endl;
 		int temp;
 		for(int i=0;i<TOPNUM;i++){
 			topp[i].similarity=0;
@@ -160,32 +168,34 @@ void similarReco::getuserList( vector<User*>& userList){
 			list[i].id=0;
 			list[i].weight=0;
 		}
-		cout<<"calculating cosine"; 
+	//cout<<"calculating cosine"<<endl; 
 		for(int i=1;i<5552;i++){	
 			paixu(cosine(user_article_list[num],user_article_list[i]),i);
 		}
 
 		int reduce=0;
 		for(int i=0;i<TOPNUM;i++){
-			/* cout<<topp[i].similarity<<"  ";
+		/*	 cout<<topp[i].similarity<<"  ";
 			cout<<topp[i].id; 
 			cout<<endl;*/
+
+			
 			reduce=reduce+userList[topp[i].id-1]->pastArticleList.size();
-
 		}
-
-
+	
+		
 		int add;
 		for(int i=0;i<TOPNUM;i++){
-			for(int j=0;j<userList[topp[i].id]->pastArticleList.size();j++){
-				in( topp[i].similarity,userList[topp[i].id]->pastArticleList[j] ,reduce+1);
+			for(int j=0;j<userList[topp[i].id-1]->pastArticleList.size();j++){
+				
+				in( topp[i].similarity,userList[topp[i].id-1]->pastArticleList[j] ,reduce+1);
 			}
 		}
 		cout<<"list list "<<endl;
 		int cal=0;
 		outf<<num<<",";
 		for(int i=0;i<100;i++){
-			if(list[i].weight<1){
+		//	if(list[i].weight<0.999999999){
 				cout<<list[i].id<<"  "<<list[i].weight<<endl;
 
 				outf<<list[i].id;
@@ -194,7 +204,7 @@ void similarReco::getuserList( vector<User*>& userList){
 				if(cal>4){
 					break;}
 				else outf<<";";
-			}
+		//	}
 		}
 
 

@@ -11,6 +11,25 @@ Articlesystem::Articlesystem()
 Articlesystem::~Articlesystem()
 {
 }
+
+void Articlesystem::outputTFIDFresult()
+{
+	vector<User*>::iterator it1;
+	int i = 1;
+	ofstream outFile("item_result.txt");
+	for (auto it1:  userList)
+	{
+		outFile << i << ',';
+		i++;
+		vector<User*>::iterator it2;
+		for (auto it2 : it1->recomment)
+			outFile << it2 << ';';
+		outFile << endl;
+	}
+	outFile.close();
+	cout << "get TFIDF Results succesfully." << endl;
+}
+
 void Articlesystem::loadUserTrain(string route ){
 	ifstream file(route);
 
@@ -209,7 +228,7 @@ void Articlesystem::getStopWord()
 vector<string> Articlesystem::divideWords(string input)
 {
 	vector<string> output;
-	string delimiters = " ,.;''""\n\\\r~!\1234567890?@#$%^&*()_+|`-=/{}[]:/<>";//分隔符
+	string delimiters = " ,.;''""\n\\\r~!\1234567890?@#$%^&*()_+|`=/{}[]:/<>";//分隔符
 	string temp;
 	int i = 0, j = 0;
 	while (i < input.length())

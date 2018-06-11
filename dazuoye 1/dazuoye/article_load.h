@@ -29,12 +29,11 @@ public:
 	unordered_set<string> stopWord;//停用词
 	unordered_map<string, int> dict;//词典，所有文章中所有出现单词出现的文档数目
 
-
 public:
 	Articlesystem();
 	~Articlesystem();
 
-
+	void outputTFIDFresult();//杈撳嚭TFIDF鐨勬帹鑽愮粨鏋?
 	void loadUserTrain(string route );
 	void getsimilarReco();
 
@@ -55,6 +54,7 @@ public:
 	Article* Combine(vector<int>);//把一个用户的文章综合成一片
 
 	void updateUserSimiliar();//更新所有用户的推荐文章，基于内容
+
 
 		
 	/*void IndividualRecommendation();
