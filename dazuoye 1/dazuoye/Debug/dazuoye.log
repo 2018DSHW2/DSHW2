@@ -1,14 +1,15 @@
-﻿  articel_load.cpp
+﻿  main.cpp
+  articel_load.cpp
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\stem.h(437): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(175): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(187): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(198): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(234): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(277): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(293): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(347): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(370): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(375): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(210): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(222): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(233): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(269): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(312): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(328): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(382): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\xiaoxundong\source\repos\dshw\dshw\dazuoye 1\dazuoye\articel_load.cpp(405): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码...
   dazuoye.vcxproj -> C:\Users\xiaoxundong\source\repos\DSHW\DSHW\dazuoye 1\Debug\dazuoye.exe

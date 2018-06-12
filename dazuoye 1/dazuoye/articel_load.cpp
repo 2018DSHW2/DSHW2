@@ -81,6 +81,41 @@ void Articlesystem::loadUserTrain(string route ){
 	return ;
 }
 
+void Articlesystem::loadUserTest(string route) {
+	ifstream file(route);
+
+	if (!file.is_open())
+	{
+		cout << "Load " << route << " failed." << endl;
+		return ;
+	}
+
+
+	while (!file.eof())
+	{
+		int id_s, article_s;
+		string temp;
+
+		getline(file, temp, ',');
+		if (temp == "")
+		{
+			break;
+		}
+		id_s = stoi(temp);
+		getline(file, temp);
+		article_s = stoi(temp);
+
+		userList[id_s - 1]->candidate.insert(article_s);
+	}
+	/*for(int i=0;i<userList[0]->pastArticleList.size();i++)
+	cout<<userList[0]->pastArticleList[i]<<endl;*/
+	file.close();
+	cout << "Load " << route << " succesfully." << endl;
+	//	getsimilarReco();
+	return;
+}
+
+
 void Articlesystem::AddUserArticle(const int userid,const int articleid)
 {
 	articleList[articleid - 1]->users.insert(userid);
@@ -372,16 +407,16 @@ void Articlesystem::updateUserSimiliar()
 		Article* com = Combine(userList[i]->pastArticleList);
 		int temp1[MAX_CB_NUM] = { -1 },min_id = 0;
 		double temp2[MAX_CB_NUM] = { -1 },min = -1,t;
-		for (int j = 0; j < articleList.size(); j++)
-		{
-			if(articleList[j]->users.find(userList[i]->id ) == articleList[j]->users.end())//不是用户已有的
-			{
-				t = getSimiliarity(com, articleList[j]);//相似度
+		unordered_set<int>::iterator it;
+		for (it = userList[i]->candidate.begin();it != userList[i]->candidate.end();it++)
+		{			
+				t = getSimiliarity(com, articleList[*it - 1]);//相似度
 				if (t > min)//需要进行插入
 				{
-					temp1[min_id] = j;
-					temp2[min_id] = t;					
+					temp1[min_id] = *it - 1;
+					temp2[min_id] = t;
 					min = temp2[0];
+					min_id = 0;
 					for (int p = 1; p < MAX_CB_NUM; p++)
 					{
 						if (temp2[p] < min)
@@ -389,13 +424,8 @@ void Articlesystem::updateUserSimiliar()
 							min = temp2[p];
 							min_id = p;
 						}
-					}
+					}//更新最小值的下标
 				}
-			}
-			else
-			{
-				continue;
-			}
 		}
 		userList[i]->recomment.clear();
 		delete(com);

@@ -8,6 +8,7 @@ public:
 	int id;
 	vector<int> pastArticleList;
 	vector<int> recomment;
+	unordered_set<int> candidate;//houxuan
 	
 public:
 	User();

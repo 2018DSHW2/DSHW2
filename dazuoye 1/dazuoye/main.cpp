@@ -23,6 +23,7 @@ void test()
 	Articlesystem* a = new Articlesystem();
 	a->loadArticle(ARTICLE_PATH);
 	a->loadUserTrain(USERTRAIN_PATH);
+	a->loadUserTest(USSERTEST_PATH);
 	a->updateUserSimiliar();
 	
 	

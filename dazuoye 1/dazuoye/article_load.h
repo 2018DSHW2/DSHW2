@@ -12,6 +12,7 @@ typedef struct Article
 	string title;
 	string abstra;
 	unordered_set<int> users;
+
 	unordered_map<string, int> keyWords;
 	unordered_map<string, double> TFIDF;
 	double Modulus;//tfidf摸长
@@ -50,6 +51,8 @@ public:
 //	bool loadArticle(string route );
 	void updateAllArticle();
 	bool loadArticle(string route );
+
+	void  loadUserTest(string route);
 
 	Article* Combine(vector<int>);//把一个用户的文章综合成一片
 
