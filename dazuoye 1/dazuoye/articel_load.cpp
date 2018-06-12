@@ -427,6 +427,21 @@ void Articlesystem::updateUserSimiliar()
 					}//更新最小值的下标
 				}
 		}
+		for (int j = 0; j < MAX_CB_NUM; j++)
+		{
+			for (int k = j + 1; k < MAX_CB_NUM; k++)
+			{
+				if (temp2[j] < temp2[k])
+				{
+					int tem = temp1[j];
+					temp1[j] = temp1[k];
+					temp1[k] = tem;
+					double temd = temp2[j];
+					temp2[j] = temp2[k];
+					temp2[k] = temd;
+				}
+			}
+		}//按从大，相关到小，不相关的顺序输出
 		userList[i]->recomment.clear();
 		delete(com);
 		for (int j = 0; j < MAX_CB_NUM; j++)
